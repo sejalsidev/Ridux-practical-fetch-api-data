@@ -11,6 +11,11 @@ export const FETCH_ALL_TODOS_SUCCESS = "FETCH_ALL_TODOS_SUCCESS";
 export const FETCH_ALL_TODOS_FAILURE = "FETCH_ALL_TODOS_FAILURE";
 export const UPDATE_ALL_TODO_SUCCESS = "UPDATE_ALL_TODO_SUCCESS";
 export const FETCH_ALL_DATA_FAILURE = "FETCH_ALL_DATA_FAILURE";
+export const UPDATE_TODO_FAILURE = "UPDATE_TODO_FAILURE";
+export const UPDATE_TODO_DATA_SUCCESS = "UPDATE_TODO_DATA_SUCCESS";
+export const UPDATE_TODO_DATA_FAILURE = "UPDATE_TODO_DATA_FAILURE";
+export const SAVE_TODO_SUCCESS = "SAVE_TODO_SUCCESS";
+export const SAVE_TODO_FAILURE = "SAVE_TODO_FAILURE";
 
 export const fetchTodoList = () => {
   return async (dispatch) => {
@@ -93,3 +98,53 @@ export const updatedData = (id, updatedTodo) => {
     }
   };
 };
+
+export const deleteTodo = (todoId) => {
+  return async (dispatch) => {
+    try {
+      await axios.delete(
+        `http://localhost:8000/todo/delete-todo-list/${todoId}`
+      );
+      dispatch({ type: DELETE_TODO_SUCCESS, payload: todoId });
+    } catch (error) {
+      dispatch({ type: FETCH_DATA_FAILURE, payload: error.message });
+    }
+  };
+};
+
+export const updateTodoInDatabase = (id, updatedTodo) => {
+  console.log(
+    "updateTodoInDatabaseupdateTodoInDatabaseupdateTodoInDatabaseupdateTodoInDatabase",
+    updatedTodo
+  );
+  console.log(id, "iddddd");
+  return async (dispatch) => {
+    try {
+      const response = await axios.put(
+        `http://localhost:8000/todo/update-todo-list/${id}`,
+        {
+          title: updatedTodo.title,
+          description: updatedTodo.description,
+        }
+      );
+      console.log(
+        response,
+        "responseresponseresponseresponseresponseresponseresponseresponseresponseresponse"
+      );
+      dispatch({ type: UPDATE_ALL_TODO_SUCCESS, payload: response.data });
+    } catch (error) {
+      console.log(error, "rerrrrrreeeeee");
+      dispatch({ type: FETCH_ALL_DATA_FAILURE, payload: error.message });
+    }
+  };
+};
+
+export const updateTodoDataSuccess = (todoId, updatedTodo) => ({
+  type: UPDATE_TODO_DATA_SUCCESS,
+  payload: { todoId, updatedTodo },
+});
+
+export const saveTodoSuccess = (todoId, savedTodo) => ({
+  type: SAVE_TODO_SUCCESS,
+  payload: { todoId, savedTodo },
+});

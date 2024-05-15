@@ -9,6 +9,10 @@ import {
   FETCH_ALL_TODOS_SUCCESS,
   FETCH_ALL_TODOS_FAILURE,
   UPDATE_ALL_TODO_SUCCESS,
+  UPDATE_TODO_DATA_SUCCESS,
+  UPDATE_TODO_DATA_FAILURE,
+  SAVE_TODO_SUCCESS,
+  SAVE_TODO_FAILURE,
 } from "../action/actions";
 
 const initialState = {
@@ -68,6 +72,44 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         data: filteredData,
+      };
+    case UPDATE_TODO_DATA_SUCCESS:
+      console.log("Updated data:", action.payload);
+    // const updatedTodos = state.data.map((todo) => {
+    //   if (todo._id === action.payload.todoId) {
+    //     return action.payload.updatedTodo;
+    //   }
+    //   return todo;
+    // });
+    // console.log("Updated todos:", updatedTodos);
+    // return {
+    //   ...state,
+    //   data: updatedTodos,
+    //   loading: false,
+    // };
+    case UPDATE_TODO_DATA_FAILURE:
+      return {
+        ...state,
+        error: action.payload,
+        loading: false,
+      };
+    case SAVE_TODO_SUCCESS:
+      const savedData = state.data.map((todo) => {
+        if (todo._id === action.payload.todoId) {
+          return action.payload.savedTodo;
+        }
+        return todo;
+      });
+      return {
+        ...state,
+        data: savedData,
+        loading: false,
+      };
+    case SAVE_TODO_FAILURE:
+      return {
+        ...state,
+        error: action.payload,
+        loading: false,
       };
     default:
       return state;

@@ -2,12 +2,14 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 import Navbar from "./component/Navbar";
 import AddTodoList from "./component/AddTodoList";
+import "bootstrap/dist/css/bootstrap.min.css";
+
 import Todo from "./component/Todo";
 
 function App() {
   return (
     <div className="App">
-      {/*  <Todo /> */}
+      {/*   <Todo /> */}
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Navbar />} />
