@@ -113,10 +113,7 @@ export const deleteTodo = (todoId) => {
 };
 
 export const updateTodoInDatabase = (id, updatedTodo) => {
-  console.log(
-    "updateTodoInDatabaseupdateTodoInDatabaseupdateTodoInDatabaseupdateTodoInDatabase",
-    updatedTodo
-  );
+  console.log("updateTodoIe", updatedTodo);
   console.log(id, "iddddd");
   return async (dispatch) => {
     try {
@@ -127,13 +124,10 @@ export const updateTodoInDatabase = (id, updatedTodo) => {
           description: updatedTodo.description,
         }
       );
-      console.log(
-        response,
-        "responseresponseresponseresponseresponseresponseresponseresponseresponseresponse"
-      );
+      console.log(response, "response");
       dispatch({ type: UPDATE_ALL_TODO_SUCCESS, payload: response.data });
     } catch (error) {
-      console.log(error, "rerrrrrreeeeee");
+      console.log(error, "rerrr");
       dispatch({ type: FETCH_ALL_DATA_FAILURE, payload: error.message });
     }
   };

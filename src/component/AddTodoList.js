@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllTodos, updatedData } from "../action/actions";
 import Table from "react-bootstrap/Table";
-import InputGroup from "react-bootstrap/InputGroup";
 import Button from "react-bootstrap/Button";
 import {
   updateTodoInDatabase,
@@ -41,19 +40,7 @@ const AddTodoList = () => {
     }
     return false;
   });
-  console.log(filteredTodos);
-  /* const handleSave = async (todoId) => {
-    const updatedTodo = editedTodos[todoId];
-    console.log(updatedTodo, "updatedTodoupdatedTodoupdatedTodo");
-    if (updatedTodo) {
-      try {
-        // dispatch(updateTodoDataSuccess(todoId, updatedTodo));
-        await dispatch(updateTodoInDatabase(todoId, updatedTodo));
-      } catch (error) {
-        console.error("Error updating todo:", error.message);
-      }
-    }
-  }; */
+
   const handleSave = async (todoId) => {
     const updatedTodo = editedTodos[todoId];
     if (updatedTodo) {
@@ -118,7 +105,7 @@ const AddTodoList = () => {
         responsive="sm"
       >
         <thead>
-          <tr>
+          <tr className="bg-dark">
             <th></th>
             <th>Title</th>
             <th>Description</th>
@@ -190,7 +177,7 @@ const AddTodoList = () => {
                       Edit
                     </Button>{" "}
                     <Button
-                      variant="primary"
+                      variant="danger"
                       onClick={() => handleDelete(todo._id)}
                     >
                       Delete

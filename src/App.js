@@ -3,7 +3,6 @@ import "./App.css";
 import Navbar from "./component/Navbar";
 import AddTodoList from "./component/AddTodoList";
 import "bootstrap/dist/css/bootstrap.min.css";
-
 import Todo from "./component/Todo";
 
 function App() {
